@@ -1,0 +1,16 @@
+[
+{"id":"1", 
+"title":"Happy Hour at The Gantry", 
+"startTime":"16:00", 
+"endTime":"19:00",
+"address1": "47-4 Vernon Blvd", 
+"address2" : "Long Island City"},
+{"id":"2", 
+"title":"Art Show at Communitea", 
+"startTime": "14:00", 
+"endTime":"17:00", 
+"address1": "11-18 46th Rd", 
+"address2": "Long Island City"} 
+]
+
+

@@ -3,7 +3,7 @@ nav {
 	background-color: lightgrey;
 	padding: 10px;
 	font-size: 120%;
-
+	align-self: center;
 }
 
 ul {
@@ -13,7 +13,7 @@ ul {
 
 nav ul li {
 	display: inline-block;
-	width:24.75%;
+	width:20%;
 	box-sizing: border-box;
 }
 

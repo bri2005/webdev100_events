@@ -17,17 +17,42 @@
 <!-- cross site stylesheet -->
 <link rel="stylesheet" type="text/css" href="styles/global_site_style.css">
 
-<!--jQuery -->
-<script src="https://code.jquery.com/jquery-2.2.4.js"   integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="   crossorigin="anonymous"></script>
-
 <!-- make sure this works on mobile with touch zooming-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- TODO media queries for checking what size the screen should be -->
 
+<!-- Style for this page only -->
+<style>
+
+#map {
+	width: 500px;
+	height: 400px;
+	margin-top: 40px;
+	margin-left: 100px;
+}
+
+</style>
+
+<script>
+	function initMap() {
+		var mapDiv = document.getElementById('map');
+		var map = new google.maps.Map(mapDiv, {
+			center: {lat: 44.540, lng: -78.546},
+			zoom: 8
+		});
+	}
+</script>
+
 </head>
 
 <body>
+
+<!-- jQuery API -->
+<script src="https://code.jquery.com/jquery-2.2.4.js"   integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="   crossorigin="anonymous"></script>
+
+<!-- Google Maps API -->
+<script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async defer></script>
 
 <!-- Top level navigation bar -->
 <nav>
@@ -38,6 +63,17 @@
 	<li><a href="./settings.html">Settings</a></li>
 </ul>
 </nav>
+
+<h1 class="text-center">What's on Now?</h1>
+
+<!-- table: left hand side with Google map, right hand side with contols -->
+
+<div class="row">
+	<div class="col-md-8">
+		<div id="map"></div>
+	</div>
+	<div class="col-md-4">This is where the controls will be </div>
+</div>
 
 </body>
 

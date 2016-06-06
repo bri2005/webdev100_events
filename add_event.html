@@ -4,6 +4,10 @@
 
 <head>
 
+
+<script src="lib/scripts/cookies.1.2.2.min.js"></script>
+
+
 <!-- use Bootstrap framework but allow own stylesheet overrides -->
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -11,19 +15,22 @@
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 
+<!--jQuery -->
+<script src="https://code.jquery.com/jquery-2.2.4.js"   integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="   crossorigin="anonymous"></script>
+
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
 <!-- cross site stylesheet -->
 <link rel="stylesheet" type="text/css" href="styles/global_site_style.css">
 
-<!--jQuery -->
-<script src="https://code.jquery.com/jquery-2.2.4.js"   integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="   crossorigin="anonymous"></script>
-
 <!-- make sure this works on mobile with touch zooming-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- TODO media queries for checking what size the screen should be -->
+
+
+<script src="scripts/addEvent.js"></script>
 
 </head>
 
@@ -39,6 +46,42 @@
 </ul>
 </nav>
 
+<!-- form to add event, store in JSON format -->
+
+<h1 class="text-center">Add Your Event</h1>
+
+<form id="addEventForm">
+
+<fieldset class="form-group">
+    <input type="hidden" class="form-control" name="id" id="id">
+</fieldset>
+<fieldset class="form-group">
+    <label for="title">Title</label>
+    <input type="text" class="form-control" id="title" name="title" placeholder="Your Event Title..">
+</fieldset>
+<fieldset class="form-group">
+    <label for="description">Description</label>
+    <textarea class="form-control" name="description" rows="3" placeholder="Tell us a bit about the event.."></textarea>
+</fieldset>
+<fieldset>
+    <label for="eventAddress">Street Address</label>
+    <input type="text" class="form-control" name="address1" placeholder="123 Fake Street">
+</fieldset>
+<fieldset>
+    <label for="eventAddress">City</label>
+    <input type="text" class="form-control" name="address2" placeholder="Long Island City">
+</fieldset>
+<fieldset class="form-group">
+    <label for="startTime">Start Time</label>
+    <input type="text" class="form-control" name="startTime" placeholder="HH:MM">
+</fieldset>
+<fieldset>
+    <label for="eventEndTime">End Time</label>
+    <input type="text" class="form-control" name="endTime" placeholder="HH:MM">
+</fieldset>
+<!-- <button id="addEventSubmitButton" type="submit" class="btn btn-primary">Submit</button> -->
+<button id="addEventSubmitButton" type="submit">Submit</button>
+</form>
 
 </body>
 

@@ -40,30 +40,28 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 }
 
 
-
-//Code to get a lat/long from an address..
-var latitude;
-var longitude;
-
-
 /*
  * Get the json file from Google Geo
  */
 
-function Convert_LatLng_To_Address(address, callback) {
+function Convert_LatLng_To_Address(id, address, callback) {
     url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&sensor=false&key=" + googleAPIKey;
     console.log(url);
 
     jQuery.getJSON(url, function (json) {
       console.log("JSON returned is "+JSON.stringify(json));
-      Create_Address(json, callback);
+      Create_Address(id, json, callback);
     });        
 }
+
+//Code to get a lat/long from an address..
+var latitude;
+var longitude;
 
 /*
 * Create an address out of the json    
 */
-function Create_Address(json, callback) {
+function Create_Address(id, json, callback) {
     
     if (!check_status(json)) // If the json file's status is not ok, then return
       return 0;
@@ -73,7 +71,10 @@ function Create_Address(json, callback) {
     console.log("Latitude: " + latitude);
     console.log("Longitude: " + longitude);
 
-    callback();
+    var result = "The latitude is " + latitude + " and longitude is " + longitude;
+    addMarker(id, { lat: latitude, lng: longitude}, map);
+    
+    console.log (result); 
 }
 
 /* 
@@ -88,6 +89,7 @@ function check_status(json) {
 
 
 function addToEvents(event) {
+  console.log("Adding to events: "+event.id + ": "+event.title);
   myEvents.push(event);
 }
 
@@ -98,7 +100,6 @@ function writeTable(eventsList) {
     console.log("writeTable called - length: "+eventsList.length);
     var tableHTML = "";
     for (i=0; i<eventsList.length; i++) {
-
         tableHTML = "<tr>";
         tableHTML = tableHTML + "<td>" + eventsList[i].id + "</td>";
         tableHTML = tableHTML + "<td>" + eventsList[i].title + "</td>";
@@ -113,30 +114,77 @@ function writeTable(eventsList) {
     console.log("TableHTML: "+tableHTML);
 }
 
+function lookupAddresses(events) {
+          for (i=0; i<events.length; i++) {
+
+              //$("#eventsTextbox").text($("#eventsTextbox").text() + myEvents[i].title);
+              address = events[i].address1 + " " + events[i].address2 + " " + events[i].address3;
+              console.log("Looking up address: "+address);
+              Convert_LatLng_To_Address(events[i].id, address, alertLatLng);      
+          }
+}
+
 
 function loadEvents() {
 
-      //load dummy data for now
-      $.getJSON( "data/dummy_events.json", function( data ) {
-            console.log(JSON.stringify(data));
-            $.each(data, function(i, item) {
-                addToEvents(data[i]);
-            });
+      //load dummy data for now...from MongoDB later!
 
-          for (i=0; i<myEvents.length; i++) {
-              $("#eventsTextbox").text($("#eventsTextbox").text() + myEvents[i].title);
-              address = myEvents[i].address1 + " " + myEvents[i].address2 + " " + myEvents[i].address3;
-              console.log("Looking up address: "+address);
-              Convert_LatLng_To_Address(address, alertLatLng);      
-          }
+      //check whether cookies file already has data, if not load JSON file into cookie
+      var eventsJSON = Cookies.get("events");
+      //var eventsJSON;
 
-          //draw a table on the page
-          writeTable(myEvents);
-      })
-      .done(function() { console.log("JSON events list parsed OK") })
-      .fail(function(jqXHR, textStatus, errorThrown) { alert('getJSON request failed! ' + textStatus); })
-      .always(function() { console.log("JSON events list parsing finished"); });   
-      
+      if (eventsJSON == undefined) {
+
+        console.log("Events cookie empty, reading from file and writing cookie.."); 
+        eventsJSON = "data/dummy_events.json";
+
+        //read from JSON and add to events array
+        $.getJSON( eventsJSON, function( data ) {
+          $.each(data, function(i, item) {
+              console.log("Adding event: "+data[i].id);
+               addToEvents(data[i]);
+          });
+
+          lookupAddresses(myEvents);
+          writeTable(myEvents);   
+
+          //set the events cookie for later use
+          Cookies.set("events", JSON.stringify(myEvents));
+          console.log("Cookie written..");
+        })
+        .done(function() { console.log("JSON events list parsed OK") })
+        .fail(function(jqXHR, textStatus, errorThrown) { alert('getJSON request failed! ' + textStatus + errorThrown); })
+        .always(function() { console.log("JSON events list parsing finished"); });   
+
+      }
+
+      else {
+
+        console.log("Events cookie found:"); 
+        console.log(eventsJSON);
+
+        eventsJSON = eventsJSON.replace(/\n/g,"");
+        eventsJSON = eventsJSON.replace(/\[\"/g,"[");
+        eventsJSON = eventsJSON.replace(/\"\]/g,"]");
+        eventsJSON = eventsJSON.replace(/\"\{/g,"{");
+
+        console.log("Cookie after cleanup: "+eventsJSON);
+
+        //remove line breaks
+        var events = JSON.parse(eventsJSON);  
+
+        //add to events
+        for (var i=0; i<events.length; i++) {
+          addToEvents(events[i]);  
+        }
+
+        //lookup the addresses
+        lookupAddresses(myEvents);
+
+        //draw a table on the page
+        writeTable(myEvents);     
+      }
+
 }
 
 function alertLatLng() {
@@ -148,20 +196,19 @@ function alertLatLng() {
 
 // In the following example, markers appear when the user clicks on the map.
 // Each marker is labeled with a single alphabetical character.
-var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-var labelIndex = 0;
+//var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+//var labelIndex = 0;
 
 // add marker to the map
-function addMarker(location, map) {
+function addMarker(id, location, map) {
   // Add the marker at the clicked location, and add the next-available label
   // from the array of alphabetical characters.
   var marker = new google.maps.Marker({
     position: location,
-    label: labels[labelIndex++ % labels.length],
-    //label: label,
+    //label: labels[labelIndex++ % labels.length],
+    label: id,
     map: map
   });
-
 
 }
 

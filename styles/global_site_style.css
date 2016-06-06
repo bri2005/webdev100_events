@@ -1,28 +1,4 @@
-/*Navigation bar settings*/
-nav {
-	background-color: lightgrey;
-	padding: 10px;
-	font-size: 120%;
-	align-self: center;
+.navbar-nav {
+	text-align: center;
+	width: 40%;
 }
-
-ul {
-	list-style: none;
-	margin: 0 auto;
-}
-
-nav ul li {
-	display: inline-block;
-	width:20%;
-	box-sizing: border-box;
-}
-
-nav ul li a:hover {
-	background-color: black;
-	color: white;
-}
-
-ul li a{
-	text-decoration: none;
-}
-

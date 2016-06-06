@@ -16,7 +16,6 @@ if (eventsJSON != undefined) {
 
     console.log("Cookie after cleanup: "+eventsJSON);
 
-    
      var events = JSON.parse(eventsJSON);  
 
 	$("#id").attr("value", events.length + 1);

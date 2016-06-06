@@ -4,6 +4,25 @@
 
 <head>
 
+<style>
+
+fieldset{
+	margin-left: 20px;
+    margin-right: 20px;
+}
+
+form {
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+.navbar-nav {
+	text-align: center;
+	width: 60%;
+}
+
+</style>
+
 
 <script src="lib/scripts/cookies.1.2.2.min.js"></script>
 
@@ -36,14 +55,24 @@
 
 <body>
 
-<!-- Top level navigation bar -->
-<nav>
-<ul>
-	<li><a href="./index.html">Find Events</a></li>
-	<li><a href="./add_event.html">Add Your Event</a></li>
-	<li><a href="./meet_up.html">Meet Up</a></li>
-	<li><a href="./settings.html">Settings</a></li>
-</ul>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">Events</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li><a href="./index.html">Find</a></li>
+        <li class="active"><a href="./add_event.html">Add</a></li>
+        <li><a href="./settings.html">Settings</a></li>
+      </ul>
+    </div>
+  </div>
 </nav>
 
 <!-- form to add event, store in JSON format -->
@@ -80,7 +109,7 @@
     <input type="text" class="form-control" name="endTime" placeholder="HH:MM">
 </fieldset>
 <!-- <button id="addEventSubmitButton" type="submit" class="btn btn-primary">Submit</button> -->
-<button id="addEventSubmitButton" type="submit">Submit</button>
+<button id="addEventSubmitButton" class="btn btn-primary" type="submit">Submit</button>
 </form>
 
 </body>

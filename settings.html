@@ -4,6 +4,9 @@
 
 <head>
 
+<!--jQuery -->
+<script src="https://code.jquery.com/jquery-2.2.4.js"   integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="   crossorigin="anonymous"></script>
+
 <!-- use Bootstrap framework but allow own stylesheet overrides -->
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -17,11 +20,18 @@
 <!-- cross site stylesheet -->
 <link rel="stylesheet" type="text/css" href="styles/global_site_style.css">
 
-<!--jQuery -->
-<script src="https://code.jquery.com/jquery-2.2.4.js"   integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="   crossorigin="anonymous"></script>
-
 <!-- make sure this works on mobile with touch zooming-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+	
+.navbar-nav {
+	text-align: center;
+	width: 60%;
+}
+
+</style>
+
 
 <!-- TODO media queries for checking what size the screen should be -->
 
@@ -29,15 +39,26 @@
 
 <body>
 
-<!-- Top level navigation bar -->
-<nav>
-<ul>
-	<li><a href="./index.html">Find Events</a></li>
-	<li><a href="./add_event.html">Add Your Event</a></li>
-	<li><a href="./meet_up.html">Meet Up</a></li>
-	<li><a href="./settings.html">Settings</a></li>
-</ul>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">Events</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li><a href="./index.html">Find</a></li>
+        <li><a href="./add_event.html">Add</a></li>
+        <li class="active"><a href="./settings.html">Settings</a></li>
+      </ul>
+    </div>
+  </div>
 </nav>
+
 
 </body>
 

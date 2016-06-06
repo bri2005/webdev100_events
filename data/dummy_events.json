@@ -1,15 +1,24 @@
 [
-{"id":"1", 
+{"id":"A", 
 "title":"Happy Hour at The Gantry", 
+"description": "Come to the Gantry - 2 for 1 Happy Hour!",
 "startTime":"16:00", 
 "endTime":"19:00",
 "address1": "47-4 Vernon Blvd", 
 "address2" : "Long Island City"},
-{"id":"2", 
+{"id":"B", 
 "title":"Art Show at Communitea", 
+"description": "Showing work from local artists",
 "startTime": "14:00", 
 "endTime":"17:00", 
 "address1": "11-18 46th Rd", 
+"address2": "Long Island City"},
+{"id":"C", 
+"title":"PS1 - thing", 
+"description": "Warm up party",
+"startTime": "14:00", 
+"endTime":"17:00", 
+"address1": "22-25 Jackson Ave", 
 "address2": "Long Island City"} 
 ]
 

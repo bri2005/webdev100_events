@@ -24,17 +24,10 @@
 <!-- Style for this page only -->
 <style>
 
-fieldset{
-	margin-left: 20px;
-    margin-right: 20px;
+.form-group {
+  margin-left: 20px;
+  margin-right: 20px;
 }
-
-form {
-	margin-top: 20px;
-	margin-left: 20px;
-	margin-right: 20px;
-}
-
 
 @media (min-width: 1200px) {
     .container{
@@ -66,11 +59,8 @@ h1 {
 <!-- Bootstrap API -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
-<!-- Google Maps API -->
-<script src="https://maps.googleapis.com/maps/api/js?callback=initMap&key=AIzaSyCcaaXYqpPCR9Bupo5Xev2mKNJiv85ozms" async defer></script>
-
-<script src="scripts/initMap.js"></script>
-
+<script src="scripts/loadSettings.js"></script>
+<script src="scripts/updateSettings.js"></script>
 
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
@@ -93,31 +83,21 @@ h1 {
 </nav>
 
 
-<h1 class="text-center">What are you into?</h1>
+<h1 class="text-center">Settings</h1>
 
-<fieldset class="form-group">
-    <label for="title">Art</label>
-    <input type="checkbox" class="form-control" name="art">
-</fieldset>
-<fieldset class="form-group">
-    <label for="title">Music</label>
-    <input type="checkbox" class="form-control" name="music">
-</fieldset>
-<fieldset class="form-group">
-    <label for="title">Drinking</label>
-    <input type="checkbox" class="form-control" name="drinking">
-</fieldset>
-<fieldset class="form-group">
-    <label for="title">Theater</label>
-    <input type="checkbox" class="form-control" name="theater">
-</fieldset>
-<fieldset class="form-group">
-    <label for="title">Food</label>
-    <input type="checkbox" class="form-control" name="food">
-</fieldset>
+<div class="form-group">
+        <label class="control-label">Background</label>
+        <div class="selectContainer">
+            <select id="bgChooser" class="form-control" name="tag">
+                <option value="">Choose a background</option>
+                <option value="white">White</option>
+                <option value="yellow">Yellow</option>
+                <option value="green">Green</option>
+                <option value="red">Red</option>
+            </select>
+        </div>
+</div>
 
-<!-- <button id="addEventSubmitButton" type="submit" class="btn btn-primary">Submit</button> -->
-<button id="updateSettings" class="btn btn-primary" type="submit">Update</button>
 </form>
 
 </body>

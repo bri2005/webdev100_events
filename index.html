@@ -19,6 +19,9 @@
 
 <!-- TODO media queries for checking what size the screen should be -->
 
+<!-- icons -->
+<script src="https://use.fontawesome.com/0d94e19713.js"></script>
+
 <!-- Style for this page only -->
 <style>
 
@@ -30,6 +33,12 @@
 	height: 400px;
 	margin-left: 35px;
 	margin-top: 20px;
+}
+
+#settings {
+	margin-top: 40px;
+	margin-right: 20px;
+	margin-left: 35px;
 }
 
 #eventsListing {
@@ -70,7 +79,7 @@
 <script src="https://maps.googleapis.com/maps/api/js?callback=initMap&key=AIzaSyCcaaXYqpPCR9Bupo5Xev2mKNJiv85ozms" async defer></script>
 
 <script src="scripts/initMap.js"></script>
-
+<script src="scripts/updateMap.js"></script>
 
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
@@ -99,6 +108,25 @@
 <div class="pull-left">
 	<div id="map" class="pull-left"></div>
 </div>
+
+<form id="settings" class="pull-left" role="form">
+    <label class="checkbox-inline">
+      <input id="artCb" type="checkbox">Art
+    </label>
+    <label class="checkbox-inline">
+      <input id="musicCb" type="checkbox">Music
+    </label>
+    <label class="checkbox-inline">
+      <input id="drinkingCb" type="checkbox">Drinking
+    </label>
+    <label class="checkbox-inline">
+      <input id="theaterCb" type="checkbox">Theater
+    </label>
+    <label class="checkbox-inline">
+      <input id="foodCb" type="checkbox">Food
+    </label>
+</form>
+
 <div class="pull-left" id="eventsListing">
 	<table id="eventsTable" class="table table-responsive">
 		<thead>
@@ -113,7 +141,10 @@
 		<tbody></tbody>
 	</table>
 </div>
-</div>
+
+
+
+
 
 </body>
 

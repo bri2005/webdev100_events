@@ -11,6 +11,8 @@ function initMap() {
   });
   var infoWindow = new google.maps.InfoWindow({map: map});
 
+  
+  /* Disable Geolocation for now 
   // Try HTML5 geolocation.
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
@@ -29,6 +31,8 @@ function initMap() {
     // Browser doesn't support Geolocation
     handleLocationError(false, infoWindow, map.getCenter());
   }
+
+  */
 
   loadEvents();
 }
@@ -101,8 +105,9 @@ function Create_Address(event, json, callback) {
     }
 
     console.log("Event icon will be "+imageURL);
+    console.log("Event tag will be "+event.tag.toLowerCase());
 
-    addMarker(event.id, { lat: latitude, lng: longitude}, map, imageURL);
+    addMarker(event.tag.toLowerCase(), { lat: latitude, lng: longitude}, map, imageURL);
     
     console.log (result); 
 }
@@ -236,7 +241,7 @@ function addMarker(id, location, map) {
 }
 
 // add marker to the map
-function addMarker(event, location, map, imageURL) {
+function addMarker(eventTag, location, map, imageURL) {
 
   //resize icon
   var icon = {
@@ -250,8 +255,11 @@ function addMarker(event, location, map, imageURL) {
     position: location,
     map: map,
     icon: icon,
-    label: event.tag
+    title: "Something"
   });
+
+  console.log("Setting eventType to "+eventTag);
+  marker.eventType = eventTag;
 
   //add marker to the markers array
   googleMapMarkers.push(marker);

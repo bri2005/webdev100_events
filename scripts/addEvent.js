@@ -78,6 +78,11 @@ $('form').submit(function(e) {
         	Cookies.set("events", JSON.stringify(events).replace(/\\/g,""));
         }
 
+        console.log("Event added - showing alert and redirecting");
+        alert("Your event was added!");
+        location.href="./index.html";
+        console.log("Redirecting done");
+
         return false;
 });
 

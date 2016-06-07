@@ -63,7 +63,7 @@ form {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="#">Events</a>
+      <a class="navbar-brand" href="./index.html">Events</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
@@ -108,6 +108,20 @@ form {
     <label for="eventEndTime">End Time</label>
     <input type="text" class="form-control" name="endTime" placeholder="HH:MM">
 </fieldset>
+
+<div class="form-group">
+        <label class="control-label">Tag</label>
+        <div class="selectContainer">
+            <select class="form-control" name="tag">
+                <option value="">Choose a tag</option>
+                <option value="art">Art</option>
+                <option value="music">Music</option>
+                <option value="drinking">Drinking</option>
+                <option value="food">Food</option>
+            </select>
+        </div>
+</div>
+
 <!-- <button id="addEventSubmitButton" type="submit" class="btn btn-primary">Submit</button> -->
 <button id="addEventSubmitButton" class="btn btn-primary" type="submit">Submit</button>
 </form>

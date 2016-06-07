@@ -1,6 +1,7 @@
 var googleAPIKey = "AIzaSyCcaaXYqpPCR9Bupo5Xev2mKNJiv85ozms";
 var map;
 var myEvents = [];
+var googleMapMarkers = [];
 
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
@@ -44,13 +45,13 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
  * Get the json file from Google Geo
  */
 
-function Convert_LatLng_To_Address(id, address, callback) {
+function Convert_LatLng_To_Address(event, address, callback) {
     url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&sensor=false&key=" + googleAPIKey;
     console.log(url);
 
     jQuery.getJSON(url, function (json) {
       console.log("JSON returned is "+JSON.stringify(json));
-      Create_Address(id, json, callback);
+      Create_Address(event, json, callback);
     });        
 }
 
@@ -61,7 +62,7 @@ var longitude;
 /*
 * Create an address out of the json    
 */
-function Create_Address(id, json, callback) {
+function Create_Address(event, json, callback) {
     
     if (!check_status(json)) // If the json file's status is not ok, then return
       return 0;
@@ -72,7 +73,36 @@ function Create_Address(id, json, callback) {
     console.log("Longitude: " + longitude);
 
     var result = "The latitude is " + latitude + " and longitude is " + longitude;
-    addMarker(id, { lat: latitude, lng: longitude}, map);
+
+    var imageURL = "";
+
+    console.log("Event type is "+event.tag);
+
+    //add a marker icon based on the event type
+    switch (event.tag.toLowerCase()) {
+        case "drinking":
+          imageURL = "img/beer.png";
+          break;
+        case "art":
+          imageURL = "img/art.png";
+          break;
+        case "food":
+          imageURL = "img/food.png";
+          break;
+        case "music":
+          imageURL = "img/music.png";
+          break;
+        case "theater":
+          imageURL = "img/theater.png";
+          break;
+        default:
+          imageURL = "img/music.png";
+          break;
+    }
+
+    console.log("Event icon will be "+imageURL);
+
+    addMarker(event.id, { lat: latitude, lng: longitude}, map, imageURL);
     
     console.log (result); 
 }
@@ -120,7 +150,7 @@ function lookupAddresses(events) {
               //$("#eventsTextbox").text($("#eventsTextbox").text() + myEvents[i].title);
               address = events[i].address1 + " " + events[i].address2 + " " + events[i].address3;
               console.log("Looking up address: "+address);
-              Convert_LatLng_To_Address(events[i].id, address, alertLatLng);      
+              Convert_LatLng_To_Address(events[i], address, alertLatLng);      
           }
 }
 
@@ -193,22 +223,38 @@ function alertLatLng() {
       console.log (result); 
 }
 
-
-// In the following example, markers appear when the user clicks on the map.
-// Each marker is labeled with a single alphabetical character.
-//var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-//var labelIndex = 0;
-
 // add marker to the map
 function addMarker(id, location, map) {
   // Add the marker at the clicked location, and add the next-available label
   // from the array of alphabetical characters.
   var marker = new google.maps.Marker({
     position: location,
-    //label: labels[labelIndex++ % labels.length],
     label: id,
     map: map
   });
+
+}
+
+// add marker to the map
+function addMarker(event, location, map, imageURL) {
+
+  //resize icon
+  var icon = {
+    url: imageURL, // url
+    scaledSize: new google.maps.Size(30, 30), // scaled size
+};
+
+  // Add the marker at the clicked location, and add the next-available label
+  // from the array of alphabetical characters.
+  var marker = new google.maps.Marker({
+    position: location,
+    map: map,
+    icon: icon,
+    label: event.tag
+  });
+
+  //add marker to the markers array
+  googleMapMarkers.push(marker);
 
 }
 
